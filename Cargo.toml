@@ -1,0 +1,39 @@
+[package]
+name = "muzzman-egui"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.release]
+opt-level = 3
+overflow-checks = false
+debug = false
+strip = "debuginfo"
+lto = true
+panic = "unwind"
+debug-assertions = false
+codegen-units = 128
+
+[profile.dev]
+opt-level = 0
+overflow-checks = true
+debug = true
+lto = false
+panic = "unwind"
+debug-assertions = true
+codegen-units = 255
+incremental = true
+
+[build]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
+
+
+[dependencies]
+# eframe = {version = "0.19.0", features = ["wgpu"]}
+eframe = {git = "https://github.com/emilk/egui", features = ["wgpu"]}
+# egui_dock = "0.2.1"
+egui_dock = {path = "vendor/egui_dock"}
+#egui_extras = "0.19.0"
+egui-kman-additions = {path = "../../../egui-kman-additions"}
+muzzman-lib-internals = {path = "../../muzzman-lib-internals"}
