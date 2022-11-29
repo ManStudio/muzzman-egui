@@ -181,17 +181,20 @@ pub fn edit_value(ui: &mut Ui, value: &mut Value, id: Id) {
         }
         Type::Path(_) => {}
         Type::HashMapSS(h) => {
-            egui::CollapsingHeader::new("values").show(ui, |ui| {
-                ui.vertical(|ui| {
-                    for (key, value) in h.iter_mut() {
-                        ui.horizontal(|ui| {
-                            ui.label(key);
-                            ui.label(":");
-                            ui.text_edit_singleline(value);
-                        });
-                    }
-                });
-            });
+            egui::CollapsingHeader::new(format!("hashmapss{}", id.short_debug_format())).show(
+                ui,
+                |ui| {
+                    ui.vertical(|ui| {
+                        for (key, value) in h.iter_mut() {
+                            ui.horizontal(|ui| {
+                                ui.label(key);
+                                ui.label(":");
+                                ui.text_edit_singleline(value);
+                            });
+                        }
+                    });
+                },
+            );
         }
         Type::HashMapS(_) => {}
         Type::HashMap(_) => {}

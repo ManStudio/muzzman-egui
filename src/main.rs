@@ -1,5 +1,6 @@
 use std::sync::RwLock;
 
+use actions::ActionsTab;
 use console::ConsoleTab;
 use control::ControlTab;
 use eframe::egui;
@@ -16,6 +17,7 @@ use muzzman_lib_internals::prelude::*;
 use storage::Storage;
 use tab::TabManager;
 
+mod actions;
 mod console;
 mod control;
 mod edit_type;
@@ -50,6 +52,7 @@ impl Default for Context {
         tab_manager.register_tab(ElementsTab::new());
         tab_manager.register_tab(ElementTab::new());
         tab_manager.register_tab(ModulesTab::new());
+        tab_manager.register_tab(ActionsTab::new());
         tab_manager.open(0);
 
         Context {
@@ -137,7 +140,7 @@ fn main() {
             drag_and_drop_support: false,
             icon_data: None,
             initial_window_pos: None,
-            initial_window_size: Some(Vec2::new(500.0, 300.0)),
+            initial_window_size: None,
             min_window_size: None,
             max_window_size: None,
             resizable: true,

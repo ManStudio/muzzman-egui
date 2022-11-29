@@ -47,45 +47,6 @@ impl ElementTab {
             if let Some(to_remove) = to_remove {
                 data.remove(&to_remove);
             }
-            ui.separator();
-            ui.with_layout(Layout::left_to_right(egui::Align::default()), |ui| {
-                ui.label("key: ");
-                let mut k = String::new();
-                if let Some(key_value) = data.get_mut("__edit__key__") {
-                    if let Type::String(key) = key_value {
-                        k = key.clone();
-                        ui.text_edit_singleline(key);
-                    }
-                } else {
-                    data.set("__edit__key__", Type::String(String::from("url")));
-                }
-                ui.label("=");
-                if let Some(value) = data.get_mut_value("__edit__value__") {
-                    edit_value(ui, value, Id::new(format!("{}__edit_value__{}", k, id)))
-                } else {
-                    data.set("__edit__value__", Type::String(String::from("http://")));
-                }
-                if ui.button("Add").clicked() {
-                    let mut key = None;
-                    let mut value = None;
-
-                    if let Some(k) = data.get("__edit__key__") {
-                        if let Type::String(k) = k {
-                            key = Some(k.clone());
-                        }
-                    }
-
-                    if let Some(v) = data.get("__edit__value__") {
-                        value = Some(v.clone());
-                    }
-
-                    if let Some(key) = key {
-                        if let Some(value) = value {
-                            data.set(&key, value);
-                        }
-                    }
-                }
-            });
         } else {
             for (name, value) in data.iter() {
                 ui.horizontal(|ui| {
@@ -105,7 +66,7 @@ impl Tab for ElementTab {
         "Element"
     }
 
-    fn init(&mut self, storage: &mut crate::storage::Storage) {}
+    fn init(&mut self, _storage: &mut crate::storage::Storage) {}
 
     fn draw(&mut self, ui: &mut eframe::egui::Ui, storage: &mut crate::storage::Storage) {
         if let Some(element) = &storage.get::<Elements>().unwrap().selected.clone() {
@@ -145,16 +106,13 @@ impl Tab for ElementTab {
             ui.horizontal(|ui| {
                 self.enabled = element.is_enabled().unwrap();
 
-                if self.editing {
-                    if ui.checkbox(&mut self.enabled, "Enabled").clicked() {
-                        element.set_enabled(self.enabled).unwrap();
-                    };
+                if self.enabled {
+                    if ui.button("Disable").clicked() {
+                        element.set_enabled(false, None).unwrap();
+                    }
                 } else {
-                    ui.label("Enabled: ");
-                    if element.is_enabled().unwrap() {
-                        ui.label("True");
-                    } else {
-                        ui.label("False");
+                    if ui.button("Enable").clicked() {
+                        element.set_enabled(true, None).unwrap();
                     }
                 }
             });
