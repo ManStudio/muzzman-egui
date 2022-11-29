@@ -1,4 +1,4 @@
-use crate::{locations::SelectedLocation, tab::Tab, Session};
+use crate::{locations::SelectedLocation, tab::Tab};
 use egui_kman_additions::table::*;
 use muzzman_lib_internals::prelude::*;
 

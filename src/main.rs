@@ -5,7 +5,6 @@ use console::ConsoleTab;
 use control::ControlTab;
 use eframe::egui;
 use eframe::egui_wgpu::WgpuConfiguration;
-use eframe::epaint::Vec2;
 use eframe::App;
 use eframe::NativeOptions;
 
@@ -32,6 +31,7 @@ use edit_type::edit_value;
 
 pub type Session = Option<Box<dyn TSession>>;
 
+#[allow(dead_code)]
 struct Context {
     session: Option<Box<dyn TSession>>,
     storage: Arc<RwLock<Storage>>,
@@ -64,7 +64,7 @@ impl Default for Context {
 }
 
 impl App for Context {
-    fn update(&mut self, ctx: &eframe::egui::Context, frame: &mut eframe::Frame) {
+    fn update(&mut self, ctx: &eframe::egui::Context, _frame: &mut eframe::Frame) {
         egui::TopBottomPanel::top("toolbar").show(ctx, |ui| {
             egui::menu::bar(ui, |ui| {
                 ui.menu_button("Tabs", |ui| {
@@ -155,6 +155,6 @@ fn main() {
             default_theme: eframe::Theme::Dark,
             run_and_return: false,
         },
-        Box::new(|ctx| Box::new(Context::default())),
+        Box::new(|_ctx| Box::new(Context::default())),
     )
 }

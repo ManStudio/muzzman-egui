@@ -13,7 +13,7 @@ impl Tab for ControlTab {
         "control"
     }
 
-    fn init(&mut self, storage: &mut crate::storage::Storage) {}
+    fn init(&mut self, _storage: &mut crate::storage::Storage) {}
 
     fn draw(&mut self, ui: &mut eframe::egui::Ui, storage: &mut crate::storage::Storage) {
         if ui.button("create LocalSession").clicked() {

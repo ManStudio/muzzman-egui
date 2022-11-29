@@ -9,6 +9,7 @@ pub struct Console {
     pub data: Vec<(u8, String)>,
 }
 
+#[allow(dead_code)]
 impl Console {
     pub fn new() -> Self {
         Self { data: Vec::new() }
@@ -31,6 +32,8 @@ impl Console {
     }
 }
 
+#[allow(non_snake_case)]
+#[allow(non_upper_case_globals)]
 pub mod LogType {
     pub const Debug: u8 = 1 << 0;
     pub const Warning: u8 = 1 << 1;
@@ -49,7 +52,6 @@ impl Tab for ConsoleTab {
 
     fn init(&mut self, storage: &mut crate::storage::Storage) {
         storage.insert(Console::new());
-        let s = storage.get_mut::<Console>().unwrap();
     }
 
     fn draw(&mut self, ui: &mut eframe::egui::Ui, storage: &mut crate::storage::Storage) {

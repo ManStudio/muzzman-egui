@@ -48,6 +48,7 @@ impl TabManager {
         res
     }
 
+    #[allow(dead_code)]
     pub fn get_tab_name(&self, id: usize) -> Option<String> {
         if let Some(tab) = self.tabs.get(id) {
             Some(tab.read().unwrap().get_name().to_string())
@@ -61,12 +62,7 @@ impl TabManager {
         let registered_tab = &self.tabs[id];
         'm: for node in self.tree.iter() {
             match node {
-                egui_dock::Node::Leaf {
-                    rect,
-                    viewport,
-                    tabs,
-                    active,
-                } => {
+                egui_dock::Node::Leaf { tabs, .. } => {
                     for tab in tabs.iter() {
                         if tab.read().unwrap().get_name()
                             == registered_tab.read().unwrap().get_name()
@@ -93,14 +89,9 @@ impl TabManager {
         if self.is_open(id) {
             let registered_tab = &self.tabs[id];
 
-            'm: for node in self.tree.iter_mut() {
+            for node in self.tree.iter_mut() {
                 match node {
-                    egui_dock::Node::Leaf {
-                        rect,
-                        viewport,
-                        tabs,
-                        active,
-                    } => {
+                    egui_dock::Node::Leaf { tabs, .. } => {
                         let mut index = 0;
                         let mut finded = false;
                         for (i, tab) in tabs.iter().enumerate() {
