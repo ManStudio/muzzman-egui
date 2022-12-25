@@ -698,6 +698,8 @@ dependencies = [
 [[package]]
 name = "get_ref"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3f7f2a36158ff259649653bc4e6dc02763e25ee544c75872705011179276ec7b"
 
 [[package]]
 name = "gethostname"
@@ -1085,19 +1087,32 @@ dependencies = [
  "eframe",
  "egui-kman-additions",
  "egui_dock",
- "muzzman-lib-internals",
+ "muzzman-lib",
 ]
 
 [[package]]
-name = "muzzman-lib-internals"
+name = "muzzman-lib"
 version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f4be11b1188321b125cca821983fa4b22fb0aece4a16ca363465ddf5b67253bc"
 dependencies = [
  "get_ref",
  "http",
  "libloading",
+ "muzzman-lib-macros",
  "rand",
- "signals-kman",
  "url",
+]
+
+[[package]]
+name = "muzzman-lib-macros"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "263407039a62daf8c74f9b8daa024897fa76c99fc0ef8af144ca1aab82e2ac4b"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -1575,13 +1590,6 @@ checksum = "5a9e7e0f2bfae24d8a5b5a66c5b257a83c7412304311512a0c054cd5e619da11"
 dependencies = [
  "lazy_static",
  "libc",
-]
-
-[[package]]
-name = "signals-kman"
-version = "0.0.5"
-dependencies = [
- "get_ref",
 ]
 
 [[package]]

@@ -1,5 +1,5 @@
 use eframe::egui::{self, Id, Layout, Ui, Widget};
-use muzzman_lib_internals::prelude::*;
+use muzzman_lib::prelude::*;
 
 use crate::{
     console::Console, edit_value, elements::Elements, file_or_data::edit_file_or_data,

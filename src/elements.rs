@@ -1,6 +1,6 @@
 use crate::{locations::SelectedLocation, tab::Tab};
 use egui_kman_additions::table::*;
-use muzzman_lib_internals::prelude::*;
+use muzzman_lib::prelude::*;
 
 pub struct Elements {
     pub selected: Option<EInfo>,

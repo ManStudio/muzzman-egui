@@ -1,3 +1,4 @@
+use std::sync::Arc;
 use std::sync::RwLock;
 
 use actions::ActionsTab;
@@ -12,7 +13,7 @@ use element::ElementTab;
 use elements::ElementsTab;
 use locations::LocationsTab;
 use modules::ModulesTab;
-use muzzman_lib_internals::prelude::*;
+use muzzman_lib::prelude::*;
 use storage::Storage;
 use tab::TabManager;
 
@@ -48,12 +49,38 @@ impl Default for Context {
         let mut tab_manager = TabManager::new(storage.clone());
         tab_manager.register_tab(ConsoleTab::new());
         tab_manager.register_tab(ControlTab::new());
+        tab_manager.register_tab(ElementTab::new());
         tab_manager.register_tab(LocationsTab::new());
         tab_manager.register_tab(ElementsTab::new());
-        tab_manager.register_tab(ElementTab::new());
         tab_manager.register_tab(ModulesTab::new());
         tab_manager.register_tab(ActionsTab::new());
-        tab_manager.open(0);
+
+        tab_manager
+            .tree
+            .push_to_focused_leaf(tab_manager.tabs[2].clone());
+        tab_manager
+            .tree
+            .push_to_focused_leaf(tab_manager.tabs[1].clone());
+
+        tab_manager
+            .tree
+            .split_below(0.into(), 1.0, vec![tab_manager.tabs[0].clone()]);
+
+        tab_manager
+            .tree
+            .split_right(2.into(), 0.5, vec![tab_manager.tabs[6].clone()]);
+
+        tab_manager
+            .tree
+            .split_left(1.into(), 0.1, vec![tab_manager.tabs[3].clone()]);
+
+        tab_manager
+            .tree
+            .split_right(3.into(), 0.5, vec![tab_manager.tabs[4].clone()]);
+
+        tab_manager
+            .tree
+            .split_below(7.into(), 1.0, vec![tab_manager.tabs[5].clone()]);
 
         Context {
             session: None,

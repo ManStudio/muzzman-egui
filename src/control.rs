@@ -1,5 +1,5 @@
 use eframe::egui;
-use muzzman_lib_internals::{local_session::session::LocalSession, prelude::*};
+use muzzman_lib::{local_session::session::LocalSession, prelude::*};
 
 use crate::{console::Console, locations::SelectedLocation, tab::Tab, Session};
 

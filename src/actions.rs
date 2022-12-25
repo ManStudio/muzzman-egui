@@ -2,7 +2,7 @@ use crate::{edit_type::edit_value, tab::Tab, Session};
 
 use eframe::{egui::Id, epaint::Vec2};
 use egui_kman_additions::table::*;
-use muzzman_lib_internals::prelude::*;
+use muzzman_lib::prelude::*;
 
 pub struct ActionsTab {
     values: Vec<(String, Value)>,

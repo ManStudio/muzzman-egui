@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 use eframe::egui::{self, Ui};
-use muzzman_lib_internals::prelude::*;
+use muzzman_lib::prelude::*;
 
 pub fn edit_file_or_data(ui: &mut Ui, ford: &mut FileOrData) {
     let mut current = match ford {

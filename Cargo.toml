@@ -27,8 +27,6 @@ incremental = true
 [build]
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
-
-
 [dependencies]
 # eframe = {version = "0.19.0", features = ["wgpu"]}
 eframe = {git = "https://github.com/emilk/egui", features = ["wgpu"]}
@@ -36,4 +34,4 @@ eframe = {git = "https://github.com/emilk/egui", features = ["wgpu"]}
 egui_dock = {path = "vendor/egui_dock"}
 #egui_extras = "0.19.0"
 egui-kman-additions = {path = "../../../egui-kman-additions"}
-muzzman-lib-internals = {path = "../../muzzman-lib-internals"}
+muzzman-lib = "0.1.0" 

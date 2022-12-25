@@ -1,5 +1,5 @@
 use eframe::egui::{self, Ui};
-use muzzman_lib_internals::prelude::*;
+use muzzman_lib::prelude::*;
 
 use crate::{storage::Storage, tab::Tab, Session};
 

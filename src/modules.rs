@@ -1,6 +1,6 @@
 use crate::{tab::Tab, Session};
 use egui_kman_additions::table::*;
-use muzzman_lib_internals::prelude::*;
+use muzzman_lib::prelude::*;
 
 #[derive(Default)]
 pub struct Modules {

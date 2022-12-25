@@ -12,10 +12,10 @@ pub trait Tab {
 }
 
 pub struct TabManager {
-    tabs: Vec<Arc<RwLock<Box<dyn Tab>>>>,
-    tree: egui_dock::Tree<Arc<RwLock<Box<dyn Tab>>>>,
-    storage: Arc<RwLock<Storage>>,
-    tab_viewer: TabViewer,
+    pub tabs: Vec<Arc<RwLock<Box<dyn Tab>>>>,
+    pub tree: egui_dock::Tree<Arc<RwLock<Box<dyn Tab>>>>,
+    pub storage: Arc<RwLock<Storage>>,
+    pub tab_viewer: TabViewer,
 }
 
 impl TabManager {

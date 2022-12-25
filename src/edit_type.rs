@@ -1,10 +1,7 @@
 use std::{collections::HashMap, path::PathBuf};
 
 use eframe::egui::{self, Id, Ui};
-use muzzman_lib_internals::{
-    prelude::{Bytes, FileOrData, Value},
-    types::{Type, TypeTag},
-};
+use muzzman_lib::prelude::*;
 
 use crate::file_or_data;
 
@@ -66,7 +63,7 @@ pub fn edit_value(ui: &mut Ui, value: &mut Value, id: Id) {
             TypeTag::HashMap(_, _) => todo!(),
             TypeTag::FileOrData => Type::FileOrData(FileOrData::Bytes(Bytes::new())),
             TypeTag::Any => todo!(),
-            TypeTag::CustomEnum(_) => todo!(),
+            TypeTag::CustomEnum(cenum) => value.default.clone(),
             TypeTag::AdvancedEnum(_) => todo!(),
             TypeTag::Vec(_) => todo!(),
             TypeTag::Bytes => Type::Bytes(Vec::new()),
@@ -202,7 +199,17 @@ pub fn edit_value(ui: &mut Ui, value: &mut Value, id: Id) {
             file_or_data::edit_file_or_data(ui, ford);
         }
         Type::Any(_) => {}
-        Type::CustomEnum(_) => {}
+        Type::CustomEnum(cenum) => {
+            egui::ComboBox::new(format!("custom_enum{}", id.short_debug_format()), "")
+                .selected_text(cenum.get_active().unwrap())
+                .show_ui(ui, |ui| {
+                    let mut selected = cenum.active.unwrap();
+                    for (i, field) in cenum.get_fields().iter().enumerate() {
+                        ui.selectable_value(&mut selected, i, field);
+                    }
+                    cenum.set_active(Some(selected));
+                });
+        }
         Type::AdvancedEnum(_) => {}
         Type::Vec(_) => {}
         Type::Bytes(_) => {}
