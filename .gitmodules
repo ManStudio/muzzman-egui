@@ -1,0 +1,3 @@
+[submodule "vendor/egui_dock"]
+	path = vendor/egui_dock
+	url = https://github.com/Adanos020/egui_dock

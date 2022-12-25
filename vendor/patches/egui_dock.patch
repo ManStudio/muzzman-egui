@@ -1,0 +1,26 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 14527dc..48ca5da 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -18,7 +18,7 @@ default = []
+ serde = ["dep:serde", "egui/serde"]
+ 
+ [dependencies]
+-egui = "0.20"
++egui = {git = "https://github.com/emilk/egui"}
+ serde = { version = "1", optional = true, features = ["derive"] }
+ 
+ [dev-dependencies]
+diff --git a/src/style.rs b/src/style.rs
+index a9a5b98..8713a1d 100644
+--- a/src/style.rs
++++ b/src/style.rs
+@@ -388,7 +388,7 @@ impl Style {
+         ui.painter().add(epaint::TextShape {
+             pos,
+             galley: galley.galley,
+-            underline: Stroke::NONE,
++            underline: Stroke::default(),
+             override_text_color,
+             angle: 0.0,
+         });
