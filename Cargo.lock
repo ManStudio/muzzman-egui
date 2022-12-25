@@ -502,6 +502,7 @@ dependencies = [
 [[package]]
 name = "egui-kman-additions"
 version = "0.1.0"
+source = "git+https://github.com/konkitoman/egui-kman-additions#0c09c90b427d38fc24829967e8cd4df15edfd7aa"
 dependencies = [
  "egui",
 ]
@@ -536,7 +537,7 @@ dependencies = [
 
 [[package]]
 name = "egui_dock"
-version = "0.2.1"
+version = "0.3.1"
 dependencies = [
  "egui",
 ]
