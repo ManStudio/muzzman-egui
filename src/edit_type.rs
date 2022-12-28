@@ -63,15 +63,19 @@ pub fn edit_value(ui: &mut Ui, value: &mut Value, id: Id) {
             TypeTag::HashMap(_, _) => todo!(),
             TypeTag::FileOrData => Type::FileOrData(FileOrData::Bytes(Bytes::new())),
             TypeTag::Any => todo!(),
-            TypeTag::CustomEnum(cenum) => value.default.clone(),
-            TypeTag::AdvancedEnum(_) => todo!(),
-            TypeTag::Vec(_) => todo!(),
+            TypeTag::CustomEnum(_) => value.default.clone(),
+            TypeTag::AdvancedEnum(_) => value.default.clone(),
+            TypeTag::Vec(_) => value.default.clone(),
             TypeTag::Bytes => Type::Bytes(Vec::new()),
             TypeTag::None => Type::None,
         }
     }
 
-    match &mut value.value {
+    edit_type(ui, &mut value.value, id);
+}
+
+pub fn edit_type(ui: &mut Ui, _type: &mut Type, id: Id) {
+    match _type {
         Type::U8(value) => {
             let mut data = value.to_string();
             ui.text_edit_singleline(&mut data);
@@ -211,7 +215,21 @@ pub fn edit_value(ui: &mut Ui, value: &mut Value, id: Id) {
                 });
         }
         Type::AdvancedEnum(_) => {}
-        Type::Vec(_) => {}
+        Type::Vec(vec) => {
+            egui::CollapsingHeader::new(format!("vec{}", id.short_debug_format())).show(ui, |ui| {
+                ui.vertical(|ui| {
+                    for element in vec.iter_mut() {
+                        edit_type(ui, element, id);
+                    }
+                });
+
+                if ui.button("clone").clicked() {
+                    if let Some(last) = vec.last() {
+                        vec.push(last.clone())
+                    }
+                }
+            });
+        }
         Type::Bytes(_) => {}
         Type::None => {}
     }
