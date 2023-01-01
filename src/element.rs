@@ -54,7 +54,13 @@ impl ElementTab {
                     ui.label("=");
                     ui.label(value.value.to_tag().to_string())
                         .on_hover_text(&value.desc);
-                    ui.label(value.value.to_string()).on_hover_text(&value.desc);
+                    if ui
+                        .button(value.value.to_string())
+                        .on_hover_text(&value.desc)
+                        .clicked()
+                    {
+                        ui.output().copied_text = value.value.to_string()
+                    };
                 });
             }
         }
