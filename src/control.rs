@@ -62,22 +62,31 @@ impl Tab for ControlTab {
                     let dir = std::fs::read_dir("modules").unwrap();
                     for entry in dir {
                         if let Ok(file) = entry {
-                            if let Ok(raw_module) = RawModule::new(file.path().to_str().unwrap()) {
-                                let module_name;
-                                {
-                                    let session = storage.get_mut::<Session>().unwrap();
-                                    if let Some(session) = session {
-                                        let module = session.add_module(raw_module).unwrap();
-                                        module_name = session.get_module_name(&module).unwrap();
-                                    } else {
-                                        module_name = String::new();
+                            match RawModule::new(file.path().to_str().unwrap()) {
+                                Ok(raw_module) => {
+                                    let module_name;
+                                    {
+                                        let session = storage.get_mut::<Session>().unwrap();
+                                        if let Some(session) = session {
+                                            let module = session.add_module(raw_module).unwrap();
+                                            module_name = session.get_module_name(&module).unwrap();
+                                        } else {
+                                            module_name = String::new();
+                                        }
                                     }
-                                }
 
-                                storage
-                                    .get_mut::<Console>()
-                                    .unwrap()
-                                    .info(&format!("Module loaded: {}", module_name));
+                                    storage
+                                        .get_mut::<Console>()
+                                        .unwrap()
+                                        .info(&format!("Module loaded: {}", module_name));
+                                }
+                                Err(err) => {
+                                    println!(
+                                        "Error when loading lib: {}, error: {:?}",
+                                        file.path().to_str().unwrap(),
+                                        err
+                                    )
+                                }
                             }
                         }
                     }
