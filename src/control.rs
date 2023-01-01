@@ -80,13 +80,11 @@ impl Tab for ControlTab {
                                         .unwrap()
                                         .info(&format!("Module loaded: {}", module_name));
                                 }
-                                Err(err) => {
-                                    println!(
-                                        "Error when loading lib: {}, error: {:?}",
-                                        file.path().to_str().unwrap(),
-                                        err
-                                    )
-                                }
+                                Err(err) => storage.get_mut::<Console>().unwrap().error(&format!(
+                                    "when loading lib: {}, error: {:?}",
+                                    file.path().to_str().unwrap(),
+                                    err
+                                )),
                             }
                         }
                     }

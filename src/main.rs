@@ -1,5 +1,6 @@
 use std::sync::Arc;
 use std::sync::RwLock;
+use std::time::Duration;
 
 use actions::ActionsTab;
 use console::ConsoleTab;
@@ -109,6 +110,7 @@ impl App for Context {
             });
         });
         self.tab_manager.show(ctx);
+        ctx.request_repaint_after(Duration::from_millis(10));
     }
 
     fn save(&mut self, _storage: &mut dyn eframe::Storage) {}
@@ -180,8 +182,8 @@ fn main() {
             renderer: eframe::Renderer::Wgpu,
             follow_system_theme: true,
             default_theme: eframe::Theme::Dark,
-            run_and_return: false,
+            run_and_return: true,
         },
-        Box::new(|_ctx| Box::new(Context::default())),
+        Box::new(|_ctx| Box::<Context>::default()),
     )
 }

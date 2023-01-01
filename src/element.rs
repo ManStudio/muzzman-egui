@@ -76,6 +76,16 @@ impl Tab for ElementTab {
 
     fn draw(&mut self, ui: &mut eframe::egui::Ui, storage: &mut crate::storage::Storage) {
         if let Some(element) = &storage.get::<Elements>().unwrap().selected.clone() {
+            // should not crash if a element is invalid
+            if element.get_name().is_err() {
+                return;
+            }
+
+            // update to the newest data
+            if !self.editing {
+                self.load(element)
+            }
+
             ui.horizontal(|ui| {
                 ui.label("Name: ");
                 if self.editing {
