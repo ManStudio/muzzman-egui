@@ -34,4 +34,4 @@ eframe = {git = "https://github.com/emilk/egui", features = ["wgpu"]}
 egui_dock = {path = "vendor/egui_dock"}
 #egui_extras = "0.19.0"
 egui-kman-additions = {git = "https://github.com/konkitoman/egui-kman-additions"}
-muzzman-lib = "0.1.0" 
+muzzman-lib = "0.1.1" 
