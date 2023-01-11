@@ -27,7 +27,7 @@ pub fn edit_file_or_data(ui: &mut Ui, ford: &mut FileOrData) {
     if last != current {
         *ford = match current {
             0 => FileOrData::File(PathBuf::new(), None),
-            1 => FileOrData::Bytes(Bytes::new()),
+            1 => FileOrData::Bytes(Bytes::default()),
             _ => panic!("Is inposibile"),
         }
     }

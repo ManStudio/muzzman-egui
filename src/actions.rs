@@ -38,13 +38,13 @@ impl Tab for ActionsTab {
                             Table::new()
                                 .column(Column::new(
                                     "Name",
-                                    |ui, value: &(String, MInfo, Vec<(String, Value)>)| {
+                                    |ui, value: &(String, MRef, Vec<(String, Value)>)| {
                                         ui.label(&value.0);
                                     },
                                 ))
                                 .column(Column::new(
                                     "Module Name",
-                                    |ui, value: &(String, MInfo, Vec<(String, Value)>)| {
+                                    |ui, value: &(String, MRef, Vec<(String, Value)>)| {
                                         ui.label(&value.1.get_name().unwrap());
                                     },
                                 ))

@@ -3,7 +3,7 @@ use egui_kman_additions::table::*;
 use muzzman_lib::prelude::*;
 
 pub struct Elements {
-    pub selected: Option<EInfo>,
+    pub selected: Option<ERef>,
 }
 
 pub struct ElementsTab {}
@@ -29,10 +29,10 @@ impl Tab for ElementsTab {
             }
         }
         let res = Table::new_with("elements")
-            .column(Column::new("Name", |ui, value: &EInfo| {
+            .column(Column::new("Name", |ui, value: &ERef| {
                 ui.label(value.get_name().unwrap());
             }))
-            .column(Column::new("Progress", |ui, value: &EInfo| {
+            .column(Column::new("Progress", |ui, value: &ERef| {
                 ui.label((value.get_progress().unwrap() * 100.0).to_string());
             }))
             .column(Column::new("Enabled", |ui, element| {

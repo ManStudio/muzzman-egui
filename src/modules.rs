@@ -4,7 +4,7 @@ use muzzman_lib::prelude::*;
 
 #[derive(Default)]
 pub struct Modules {
-    pub selected: Option<MInfo>,
+    pub selected: Option<MRef>,
 }
 
 pub struct ModulesTab {}
@@ -32,7 +32,7 @@ impl Tab for ModulesTab {
             modules = session.get_modules(0..len).unwrap();
             selected = Table::new_with("modules")
                 .set_values(modules.clone())
-                .column(Column::new("Name", |ui, value: &MInfo| {
+                .column(Column::new("Name", |ui, value: &MRef| {
                     ui.label(value.get_name().unwrap());
                 }))
                 .column(Column::new("Proxy", |ui, value| {

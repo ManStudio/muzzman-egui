@@ -27,7 +27,7 @@ impl ElementTab {
             enabled: false,
             element_data: Data::default(),
             module_data: Data::default(),
-            data: FileOrData::Bytes(Bytes::new()),
+            data: FileOrData::Bytes(Bytes::default()),
         }
     }
 
@@ -210,7 +210,7 @@ impl Tab for ElementTab {
 }
 
 impl ElementTab {
-    fn save(&mut self, element: &EInfo) {
+    fn save(&mut self, element: &ERef) {
         element.set_name(&self.name).unwrap();
         element.set_desc(&self.desc).unwrap();
         element.set_meta(&self.meta).unwrap();
@@ -219,7 +219,7 @@ impl ElementTab {
         element.set_data(self.data.clone()).unwrap();
     }
 
-    pub fn load(&mut self, element: &EInfo) {
+    pub fn load(&mut self, element: &ERef) {
         self.name = element.get_name().unwrap();
         self.desc = element.get_desc().unwrap();
         self.meta = element.get_meta().unwrap();

@@ -17,7 +17,7 @@ impl Tab for ControlTab {
 
     fn draw(&mut self, ui: &mut eframe::egui::Ui, storage: &mut crate::storage::Storage) {
         if ui.button("create LocalSession").clicked() {
-            *storage.get_mut::<Session>().unwrap() = Some(LocalSession::new());
+            *storage.get_mut::<Session>().unwrap() = Some(LocalSession::new_session());
             storage
                 .get_mut::<Console>()
                 .unwrap()
@@ -62,7 +62,7 @@ impl Tab for ControlTab {
                     let dir = std::fs::read_dir("modules").unwrap();
                     for entry in dir {
                         if let Ok(file) = entry {
-                            match RawModule::new(file.path().to_str().unwrap()) {
+                            match RawModule::new_module(file.path().to_str().unwrap()) {
                                 Ok(raw_module) => {
                                     let module_name;
                                     {

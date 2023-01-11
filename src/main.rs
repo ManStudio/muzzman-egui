@@ -185,5 +185,5 @@ fn main() {
             run_and_return: true,
         },
         Box::new(|_ctx| Box::<Context>::default()),
-    )
+    );
 }

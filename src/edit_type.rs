@@ -60,8 +60,7 @@ pub fn edit_value(ui: &mut Ui, value: &mut Value, id: Id) {
             TypeTag::Path => Type::Path(PathBuf::new()),
             TypeTag::HashMapSS => Type::HashMapSS(HashMap::new()),
             TypeTag::HashMapS(_) => todo!(),
-            TypeTag::HashMap(_, _) => todo!(),
-            TypeTag::FileOrData => Type::FileOrData(FileOrData::Bytes(Bytes::new())),
+            TypeTag::FileOrData => Type::FileOrData(FileOrData::Bytes(Bytes::default())),
             TypeTag::Any => todo!(),
             TypeTag::CustomEnum(_) => value.default.clone(),
             TypeTag::AdvancedEnum(_) => value.default.clone(),
@@ -198,7 +197,6 @@ pub fn edit_type(ui: &mut Ui, _type: &mut Type, id: Id) {
             );
         }
         Type::HashMapS(_) => {}
-        Type::HashMap(_) => {}
         Type::FileOrData(ford) => {
             file_or_data::edit_file_or_data(ui, ford);
         }

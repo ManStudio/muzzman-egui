@@ -4,7 +4,7 @@ use muzzman_lib::prelude::*;
 use crate::{storage::Storage, tab::Tab, Session};
 
 pub struct SelectedLocation {
-    pub selected: Option<LInfo>,
+    pub selected: Option<LRef>,
 }
 
 pub struct LocationsTab {}
@@ -30,7 +30,7 @@ impl LocationsTab {
         Self {}
     }
 
-    fn draw_locations(&mut self, ui: &mut Ui, storage: &mut Storage, location: LInfo) {
+    fn draw_locations(&mut self, ui: &mut Ui, storage: &mut Storage, location: LRef) {
         let is_selected;
 
         {
